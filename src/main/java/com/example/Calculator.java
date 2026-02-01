@@ -2,34 +2,25 @@ package main.java.com.example;
 
 public class Calculator {
 
-    // EVEN WORSE: longer, more complex, duplicated logic
 public int calculate(int a, int b, String op) {
-    if(op.equals("add")) {
-        return a + b;
-    } else if(op.equals("add-again")) {
-        return a + b; // DUPLICATION
-    } else if(op.equals("sub")) {
-        return a - b;
-    } else if(op.equals("sub-again")) {
-        return a - b; // DUPLICATION
-    } else if(op.equals("mul")) {
-        return a * b;
-    } else if(op.equals("div")) {
-        if(b == 0) {
-            return 0;
-        } else {
+    switch(op) {
+        case "add":
+            return a + b;
+        case "sub":
+            return a - b;
+        case "mul":
+            return a * b;
+        case "div":
+            if(b == 0) {
+                throw new IllegalArgumentException("Division by zero");
+            }
             return a / b;
-        }
-    } else if(op.equals("mod")) {
-        return a % b;
-    } else if(op.equals("pow")) {
-        int result = 1;
-        for(int i = 0; i < b; i++) {
-            result = result * a;
-        }
-        return result;
-    } else {
-        return 0;
+        case "mod":
+            return a % b;
+        case "pow":
+            return (int) Math.pow(a, b);
+        default:
+            throw new IllegalArgumentException("Unknown operation: " + op);
     }
 }
 
@@ -42,8 +33,5 @@ public int calculate(int a, int b, String op) {
         return a + b;
     }
 
-    // INTENTIONAL DUPLICATION
-    public int addAgain(int a, int b) {
-    return a + b;
-}
+    
 }
